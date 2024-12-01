@@ -1,0 +1,50 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // O plugin Flutter Gradle deve ser aplicado após os plugins Android e Kotlin.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.matthewpflutter.app_remember_me" // Certifique-se de que isso corresponde ao pacote no AndroidManifest.xml
+    compileSdk = 34 // Atualizado para SDK 34 (última versão estável)
+    ndkVersion = "23.2.8568313" // Exemplo de NDK, ajuste conforme instalado
+
+    compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+
+    kotlinOptions {
+        jvmTarget = "1.8" // Atualizado para compatibilidade com JDK 21
+    }
+
+    defaultConfig {
+        // Application ID único
+        applicationId = "com.matthewpflutter.app_remember_me"
+
+        // Especificação das versões do SDK
+        minSdk = 21 // Deve corresponder à versão mínima suportada
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
+
+        // Configuração adicional
+        multiDexEnabled = true // Habilita multidex para projetos grandes
+    }
+
+    buildTypes {
+        release {
+            // Configuração de assinatura para builds de release
+            signingConfig = signingConfigs.debug
+            minifyEnabled false // Desabilita minificação para evitar problemas de depuração
+            shrinkResources false // Desabilita remoção de recursos não utilizados para depuração
+        }
+    }
+}
+
+flutter {
+    source = "../.." // Caminho para a fonte do Flutter
+}
+
